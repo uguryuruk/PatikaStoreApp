@@ -1,4 +1,5 @@
 import {
+  FlatList,
   StyleSheet,
   Text,
   TextInput,
@@ -23,6 +24,17 @@ const TodoInput = () => {
   );
 };
 
+const TodoList = () => {
+  // buradaki elemanların da onPress i olacak, üstünü çizip rengini değiştirecek.
+  return (
+    <FlatList
+      keyExtractor={item => item.id}
+      data={todoData}
+      renderItem={renderSong}
+      ></FlatList>
+  );
+};
+
 const App = () => {
   return (
     <View style={styles.container}>
@@ -43,10 +55,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#102027',
     flex: 1,
   },
-  headContainer:{
-    flex:1,
-    flexDirection:'row',
-    justifyContent:'space-around'
+  headContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   header: {
     fontSize: 36,
