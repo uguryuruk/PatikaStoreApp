@@ -6,12 +6,30 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 const todoData = [
   {id: 1, task: 'Temizlik'},
   {id: 2, task: 'Çamaşır'},
 ];
+
+const ToggleButton = ({item}) => {
+  const [isToggled, setIsToggled] = useState(false);
+
+  const handlePress = () => {
+    setIsToggled(!isToggled);
+  };
+};
+
+const todoCard = ({item}) => {
+  return (
+    <TouchableOpacity
+      style={isToggled ? styles.activeTaskButton : styles.activeTaskButton}
+      onPress={x => console.log(x)}>
+      <Text style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>{item.task}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const TodoInput = () => {
   return (
@@ -26,13 +44,7 @@ const TodoInput = () => {
 
 const TodoList = () => {
   // buradaki elemanların da onPress i olacak, üstünü çizip rengini değiştirecek.
-  return (
-    <FlatList
-      keyExtractor={item => item.id}
-      data={todoData}
-      renderItem={renderSong}
-      ></FlatList>
-  );
+  return <FlatList data={todoData} renderItem={todoCard}></FlatList>;
 };
 
 const App = () => {
@@ -42,7 +54,9 @@ const App = () => {
         <Text style={styles.header}>Yapılacaklar:</Text>
         <Text style={styles.header}>2</Text>
       </View>
-
+      <View>
+        <TodoList></TodoList>
+      </View>
       <TodoInput />
     </View>
   );
@@ -76,9 +90,38 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'center',
   },
+  activeTaskButton: {
+    backgroundColor: '#7DA453',
+    borderRadius: 5,
+    height: 40,
+    width: 200,
+    margin: 5,
+    padding: 5,
+    alignSelf: 'center',
+  },
+  passiveTaskButton: {
+    backgroundColor: '#37474F',
+    borderRadius: 5,
+    height: 40,
+    width: 200,
+    margin: 5,
+    padding: 5,
+    alignSelf: 'center',
+  },
   buttonText: {
     fontSize: 22,
     color: 'white',
     textAlign: 'center',
+  },
+  activeButtonText: {
+    fontSize: 22,
+    color: 'white',
+    textAlign: 'center',
+  },
+  passiveButtonText: {
+    fontSize: 22,
+    color: 'white',
+    textAlign: 'center',
+    textDecorationLine: 'line-through',
   },
 });
