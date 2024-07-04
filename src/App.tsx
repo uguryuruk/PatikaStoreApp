@@ -13,11 +13,9 @@ const todoData = [
   {id: 2, task: 'Çamaşır'},
 ];
 
-
-
-const todoCard = ({item}) => {
-
-  const [isToggled, setIsToggled] = useState(false);
+const TodoCard = ({item}) => {
+  // render error invalid hook call
+  const [isToggled, setIsToggled] = useState(true);
 
   const handlePress = () => {
     setIsToggled(!isToggled);
@@ -25,14 +23,15 @@ const todoCard = ({item}) => {
 
   return (
     <TouchableOpacity
-      style={isToggled ? styles.activeTaskButton : styles.activeTaskButton}
+      style={isToggled ? styles.activeTaskButton : styles.passiveTaskButton}
       onPress={handlePress}>
-      <Text style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>{item.task}</Text>
+      <Text
+        style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>
+        {item.task}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-
 
 const TodoInput = () => {
   const [todoList, setTodoList] = useState(todoData);
@@ -41,15 +40,21 @@ const TodoInput = () => {
 
   const handleAddTodo = () => {
     if (currentTodo.trim()) {
-      setTodoList([...todoList, { id: idCounter, task: currentTodo }]);
+      setTodoList([...todoList, {id: idCounter, task: currentTodo}]);
       setCurrentTodo('');
       setIdCounter(idCounter + 1);
+      console.log(todoList);
     }
   };
 
   return (
     <View style={styles.inner_container}>
-      <TextInput placeholder="Yapılacak.." value={currentTodo} onChangeText={setCurrentTodo}/>
+      <TextInput
+        placeholder="Yapılacak.."
+        value={currentTodo}
+        onChangeText={setCurrentTodo}
+        style={styles.buttonText}
+      />
       <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
         <Text style={styles.buttonText}>Kaydet</Text>
       </TouchableOpacity>
@@ -59,14 +64,11 @@ const TodoInput = () => {
 
 const TodoList = () => {
   // buradaki elemanların da onPress i olacak, üstünü çizip rengini değiştirecek.
-  return <FlatList data={todoData} renderItem={todoCard}></FlatList>;
-
+  // listenin güncellenmesi işini araştır, daha üst düzey bir state gibi.
+  return <FlatList data={todoData} renderItem={({ item }) => <TodoCard item={item} />}></FlatList>;
 };
 
 const App = () => {
-
-  
-
   return (
     <View style={styles.container}>
       <View style={styles.headContainer}>
@@ -76,7 +78,7 @@ const App = () => {
       <View>
         <TodoList></TodoList>
       </View>
- 
+
       <TodoInput />
     </View>
   );
@@ -143,5 +145,5 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     textDecorationLine: 'line-through',
-  }
+  },
 });
