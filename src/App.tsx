@@ -35,18 +35,20 @@ const todoCard = ({item}) => {
 const TodoInput = () => {
   const [todoList, setTodoList] = useState(todoData);
   const [currentTodo, setCurrentTodo] = useState('');
+  const [idCounter, setIdCounter] = useState(3);
 
   const handleAddTodo = () => {
     if (currentTodo.trim()) {
-      setTodoList([...todoList, { id: Date.now().toString(), task: currentTodo }]);
+      setTodoList([...todoList, { id: idCounter, task: currentTodo }]);
       setCurrentTodo('');
+      setIdCounter(idCounter + 1);
     }
   };
 
   return (
     <View style={styles.inner_container}>
-      <TextInput placeholder="Yapılacak.." />
-      <TouchableOpacity style={styles.addButton} onPress={x => console.log(x)}>
+      <TextInput placeholder="Yapılacak.." value={currentTodo} onChangeText={setCurrentTodo}/>
+      <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
         <Text style={styles.buttonText}>Kaydet</Text>
       </TouchableOpacity>
     </View>
