@@ -32,23 +32,7 @@ const todoCard = ({item}) => {
   );
 };
 
-const ToggleButton = ({item}) => {
-  const [isToggled, setIsToggled] = useState(false);
 
-  const handlePress = () => {
-    setIsToggled(!isToggled);
-  };
-};
-
-const todoCard = ({item}) => {
-  return (
-    <TouchableOpacity
-      style={isToggled ? styles.activeTaskButton : styles.activeTaskButton}
-      onPress={x => console.log(x)}>
-      <Text style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>{item.task}</Text>
-    </TouchableOpacity>
-  );
-};
 
 const TodoInput = () => {
   const [todoList, setTodoList] = useState(todoData);
