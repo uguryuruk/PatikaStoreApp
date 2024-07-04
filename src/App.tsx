@@ -32,6 +32,24 @@ const todoCard = ({item}) => {
   );
 };
 
+const ToggleButton = ({item}) => {
+  const [isToggled, setIsToggled] = useState(false);
+
+  const handlePress = () => {
+    setIsToggled(!isToggled);
+  };
+};
+
+const todoCard = ({item}) => {
+  return (
+    <TouchableOpacity
+      style={isToggled ? styles.activeTaskButton : styles.activeTaskButton}
+      onPress={x => console.log(x)}>
+      <Text style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>{item.task}</Text>
+    </TouchableOpacity>
+  );
+};
+
 const TodoInput = () => {
   const [todoList, setTodoList] = useState(todoData);
   const [currentTodo, setCurrentTodo] = useState('');
@@ -58,6 +76,7 @@ const TodoInput = () => {
 const TodoList = () => {
   // buradaki elemanların da onPress i olacak, üstünü çizip rengini değiştirecek.
   return <FlatList data={todoData} renderItem={todoCard}></FlatList>;
+
 };
 
 const App = () => {
@@ -73,6 +92,7 @@ const App = () => {
       <View>
         <TodoList></TodoList>
       </View>
+ 
       <TodoInput />
     </View>
   );
@@ -139,5 +159,5 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     textDecorationLine: 'line-through',
-  },
+  }
 });
