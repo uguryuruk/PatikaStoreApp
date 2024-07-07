@@ -11,6 +11,7 @@ import React, {useState} from 'react';
 const todoData = [
   {id: 1, task: 'Temizlik'},
   {id: 2, task: 'Çamaşır'},
+  {id: 3, task: 'Bulaşık'},
 ];
 
 const TodoCard = ({item}) => {
@@ -33,53 +34,61 @@ const TodoCard = ({item}) => {
   );
 };
 
-const TodoInput = () => {
-  const [todoList, setTodoList] = useState(todoData);
-  const [currentTodo, setCurrentTodo] = useState('');
-  const [idCounter, setIdCounter] = useState(3);
-
-  const handleAddTodo = () => {
-    if (currentTodo.trim()) {
-      setTodoList([...todoList, {id: idCounter, task: currentTodo}]);
-      setCurrentTodo('');
-      setIdCounter(idCounter + 1);
-      console.log(todoList);
-    }
-  };
-
+const TodoInput = ({value, onChangeText, onAddTodo}) => {
   return (
     <View style={styles.inner_container}>
       <TextInput
         placeholder="Yapılacak.."
-        value={currentTodo}
-        onChangeText={setCurrentTodo}
+        value={value}
+        onChangeText={onChangeText}
         style={styles.buttonText}
       />
-      <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
+      <TouchableOpacity style={styles.addButton} onPress={onAddTodo}>
         <Text style={styles.buttonText}>Kaydet</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const TodoList = () => {
+const TodoList = props => {
   // buradaki elemanların da onPress i olacak, üstünü çizip rengini değiştirecek.
   // listenin güncellenmesi işini araştır, daha üst düzey bir state gibi.
-  return <FlatList data={todoData} renderItem={({ item }) => <TodoCard item={item} />}></FlatList>;
+  return (
+    <FlatList
+      style={styles.listItems}
+      data={props.data}
+      renderItem={({item}) => <TodoCard item={item} />}></FlatList>
+  );
 };
 
 const App = () => {
+  const [todoList, setTodoList] = useState(todoData);
+  const [currentTodo, setCurrentTodo] = useState('');
+  const [idCounter, setIdCounter] = useState(3);
+
+  const handleAddTodo = () => {
+    if (currentTodo.trim()) {
+      setIdCounter(idCounter + 1); // Increment idCounter state
+      setTodoList([...todoList, {id: idCounter + 1, task: currentTodo}]);
+      setCurrentTodo('');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headContainer}>
         <Text style={styles.header}>Yapılacaklar:</Text>
-        <Text style={styles.header}>2</Text>
+        <Text style={styles.header}>{todoList.length}</Text>
       </View>
       <View>
-        <TodoList></TodoList>
+        <TodoList data={todoList}></TodoList>
       </View>
 
-      <TodoInput />
+      <TodoInput
+        value={currentTodo}
+        onChangeText={setCurrentTodo}
+        onAddTodo={handleAddTodo}
+      />
     </View>
   );
 };
@@ -90,11 +99,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#102027',
     flex: 1,
+    // alignItems: 'baseline'
   },
   headContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  listItems: {
+    // alignItems: 'center'
+    // flex:1
   },
   header: {
     fontSize: 36,
