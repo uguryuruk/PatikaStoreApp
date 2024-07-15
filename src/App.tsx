@@ -13,8 +13,8 @@ const todoData = [
   {id: 2, task: 'Çamaşır'},
   {id: 3, task: 'Bulaşık'},
 ];
-
-const TodoCard = ({item}) => {
+// TODO: tek tıkla tamamlananları da yapılacaklar sayısından düş.
+const TodoCard = ({item, onDelete}) => {
   // render error invalid hook call
   const [isToggled, setIsToggled] = useState(true);
 
@@ -25,7 +25,8 @@ const TodoCard = ({item}) => {
   return (
     <TouchableOpacity
       style={isToggled ? styles.activeTaskButton : styles.passiveTaskButton}
-      onPress={handlePress}>
+      onPress={handlePress}
+      onLongPress={() => onDelete(item.id)} >
       <Text
         style={isToggled ? styles.activeButtonText : styles.passiveButtonText}>
         {item.task}
@@ -43,7 +44,7 @@ const TodoInput = ({value, onChangeText, onAddTodo}) => {
         onChangeText={onChangeText}
         style={styles.buttonText}
       />
-      <TouchableOpacity style={styles.addButton} onPress={onAddTodo}>
+      <TouchableOpacity style={styles.addButton} onPress={onAddTodo} >
         <Text style={styles.buttonText}>Kaydet</Text>
       </TouchableOpacity>
     </View>
@@ -57,7 +58,7 @@ const TodoList = props => {
     <FlatList
       style={styles.listItems}
       data={props.data}
-      renderItem={({item}) => <TodoCard item={item} />}></FlatList>
+      renderItem={({item}) => <TodoCard item={item} onDelete={props.onDelete}/>}></FlatList>
   );
 };
 
@@ -74,6 +75,11 @@ const App = () => {
     }
   };
 
+  const handleDelete = (id) => {
+    let new_list = todoList.filter(item => item.id != id)
+    setTodoList(new_list)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headContainer}>
@@ -81,13 +87,13 @@ const App = () => {
         <Text style={styles.header}>{todoList.length}</Text>
       </View>
       <View>
-        <TodoList data={todoList}></TodoList>
+        <TodoList data={todoList} onDelete={handleDelete}></TodoList>
       </View>
 
       <TodoInput
         value={currentTodo}
         onChangeText={setCurrentTodo}
-        onAddTodo={handleAddTodo}
+        onAddTodo={handleAddTodo}        
       />
     </View>
   );
