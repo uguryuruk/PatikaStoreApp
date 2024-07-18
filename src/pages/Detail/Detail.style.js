@@ -11,13 +11,19 @@ export default styles = StyleSheet.create({
     width: deviceSize.width,
     height: deviceSize.height / 3,
     resizeMode: 'contain',
+    backgroundColor: 'white',
+
   },
   title: {
     fontWeight: 'bold',
+    fontSize: 22,
   },
-  desc: {fontStyle: 'italic'},
+  desc: {fontStyle: 'italic',
+    marginVertical: 5,
+  },
   price: {
     fontWeight: 'bold',
     fontSize: 22,
+    textAlign: 'right',
   },
 });
