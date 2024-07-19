@@ -11,19 +11,21 @@ export default function useFetch(url) {
     try {
       // datayı parçala, responseData olarak isimlendir!
 
+      console.log(url);
       const {data: responseData} = await axios.get(url);
       setData(responseData);
       setLoading(false);
-      console.log(url);
+      // console.log(responseData);
     } catch (err) {
       setLoading(false);
       setError(err.message);
+      console.log(err);
     }
   };
 
   useEffect(() => {
     fetchData(); // when component mounts
-  }, []);
+  }, [url]);
 
   return {error, loading, data};
 }

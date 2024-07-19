@@ -11,10 +11,9 @@ import Config from 'react-native-config';
 import CategoryCard from '../../components/CategoryCard';
 import useFetch from '../../hooks/useFetch';
 
-
 export default function Categories({navigation}) {
   // let apim = Config.API_URL;
-  let apim = 'www.themealdb.com/api/json/v1/1/categories.php';
+  let apim = 'https://www.themealdb.com/api/json/v1/1/categories.php';
 
   const {error, loading, data} = useFetch(apim);
 
@@ -22,15 +21,19 @@ export default function Categories({navigation}) {
     navigation.navigate('MealsPage', {categoryName});
   };
 
-  const renderCategory = ({item}) => (
-    <CategoryCard category={item} onSelect={() => handleCategorySelect(item.strCategory)} />
-  );
+  const renderCategory = ({item}) => {
+    return (
+    <CategoryCard
+      category={item}
+      onSelect={() => handleCategorySelect(item.strCategory)}
+    />
+    
+  );}
 
   // return <Loading />;
 
   if (loading) {
     return <ActivityIndicator size="large" />;
-
   }
 
   if (error) {
@@ -38,7 +41,10 @@ export default function Categories({navigation}) {
   }
   return (
     <SafeAreaView>
-      <FlatList data={data} renderItem={renderCategory} />
+      <Text>Categories</Text>
+      {/* <Text>{data.categories[0].idCategory}</Text> */}
+      
+      <FlatList data={data.categories} renderItem={renderCategory} keyExtractor={item => item.idCategory}/>
     </SafeAreaView>
   );
 }
