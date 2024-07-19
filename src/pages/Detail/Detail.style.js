@@ -26,4 +26,13 @@ export default styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'right',
   },
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
 });

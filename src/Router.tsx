@@ -4,7 +4,8 @@ import * as React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Products from './pages/Products';
+import Categories from './pages/Categories';
+import Meals from './pages/Meals';
 import Detail from './pages/Detail';
 
 
@@ -14,9 +15,17 @@ function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ProductsPage" component={Products} 
+        <Stack.Screen name="CategoriesPage" component={Categories} 
         options={{
-          title: 'Dükkan',
+          title: 'Categories',
+          headerStyle: {backgroundColor: '#64b5f6'
+          },
+          headerTitleStyle: {color: 'white'}
+        }}
+        />
+        <Stack.Screen name="MealsPage" component={Meals} 
+        options={{
+          title: 'Meals',
           headerStyle: {backgroundColor: '#64b5f6'
           },
           headerTitleStyle: {color: 'white'}
@@ -24,7 +33,7 @@ function Router() {
         />
         <Stack.Screen name="DetailPage" component={Detail} 
              options={{
-              title: 'Detay',
+              title: 'Meal Details',
               headerStyle: {backgroundColor: '#64b5f6'
               },
               headerTitleStyle: {color: 'white'},
