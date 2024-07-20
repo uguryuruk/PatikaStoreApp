@@ -47,9 +47,7 @@ export default function Detail({route}) {
         <View style={styles.container}>
           <Image source={{uri: meal.strMealThumb}} style={styles.image} />
           <Text style={styles.title}>{meal.strMeal}</Text>
-          <Text style={styles.desc}>{meal.strCategory}</Text>
-          <Text style={styles.desc}>{meal.strArea} </Text>
-          <Text style={styles.desc}>{meal.strArea} </Text>
+          <Text style={styles.categoryArea}>{meal.strCategory} - {meal.strArea}</Text>
           <Text style={styles.desc}>{meal.strInstructions} </Text>
           <TouchableOpacity
             style={styles.button}

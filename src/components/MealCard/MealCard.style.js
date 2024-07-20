@@ -22,9 +22,6 @@ title:{
     backgroundColor: 'rgba(26, 32, 44, 0.7)',
     width:"100%",
     paddingHorizontal: 10,
-    // flex:1,
-    // opacity: 0.5,
-
 },
 body_container:{
     width: '100%',
