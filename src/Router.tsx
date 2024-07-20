@@ -18,25 +18,25 @@ function Router() {
         <Stack.Screen name="CategoriesPage" component={Categories} 
         options={{
           title: 'Categories',
-          headerStyle: {backgroundColor: '#64b5f6'
+          headerStyle: {backgroundColor: 'white'
           },
-          headerTitleStyle: {color: 'white'}
+          headerTitleStyle: {color: "#FFA522"}
         }}
         />
         <Stack.Screen name="MealsPage" component={Meals} 
         options={{
           title: 'Meals',
-          headerStyle: {backgroundColor: '#64b5f6'
+          headerStyle: {backgroundColor: 'white'
           },
-          headerTitleStyle: {color: 'white'}
+          headerTitleStyle: {color: "#FFA522"}
         }}
         />
         <Stack.Screen name="DetailPage" component={Detail} 
              options={{
               title: 'Meal Details',
-              headerStyle: {backgroundColor: '#64b5f6'
+              headerStyle: {backgroundColor: 'white'
               },
-              headerTitleStyle: {color: 'white'},
+              headerTitleStyle: {color: "#FFA522"},
               headerTintColor: 'white', // geri ok
             }}
         />

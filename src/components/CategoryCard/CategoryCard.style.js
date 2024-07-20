@@ -5,9 +5,11 @@ export default styles = StyleSheet.create({
 container:{
     borderWidth:1,
     borderColor: '#bdbdbd',
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#EBEFF1',
     margin: 10,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderTopLeftRadius:50,
+    borderBottomLeftRadius:50,
 },
 image:{
     width:100,
@@ -15,11 +17,13 @@ image:{
     minHeight:100,
     resizeMode: 'contain',  // sığdırır.
     backgroundColor: 'white',
+    borderRadius: 50,
 },
 body_container:{
     flex:1,
     padding:5,
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    backgroundColor:'#EBEFF1',
 },
 title:{
     fontWeight: 'bold',

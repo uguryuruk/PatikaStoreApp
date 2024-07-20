@@ -5,31 +5,30 @@ export default styles = StyleSheet.create({
 container:{
     borderWidth:1,
     borderColor: '#bdbdbd',
-    backgroundColor: '#e0e0e0',
     margin: 10,
-    flexDirection: 'row'
+    overflow: 'hidden',
 },
 image:{
-    width:100,
-    // height:100,
-    minHeight:100,
-    resizeMode: 'contain',  // sığdırır.
+    width:"100%",
+    height:250,
     backgroundColor: 'white',
 },
-body_container:{
-    flex:1,
-    padding:5,
-    justifyContent:'space-between'
-},
 title:{
+    color: 'white',
     fontWeight: 'bold',
-    fontSize:18,
-},
-price:{
-    textAlign:'right',
-    fontSize:16,
-    fontStyle:'italic'
+    fontSize:30,
+    bottom:10,
+    position: 'absolute',
+    backgroundColor: 'rgba(26, 32, 44, 0.7)',
+    width:"100%",
+    paddingHorizontal: 10,
+    // flex:1,
+    // opacity: 0.5,
 
 },
+body_container:{
+    width: '100%',
+    paddingHorizontal: 10,
+}
 
 })

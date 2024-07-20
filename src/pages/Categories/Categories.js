@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import Config from 'react-native-config';
+import styles from './Categories.style';
 
 import CategoryCard from '../../components/CategoryCard';
 import useFetch from '../../hooks/useFetch';
@@ -23,12 +24,12 @@ export default function Categories({navigation}) {
 
   const renderCategory = ({item}) => {
     return (
-    <CategoryCard
-      category={item}
-      onSelect={() => handleCategorySelect(item.strCategory)}
-    />
-    
-  );}
+      <CategoryCard
+        category={item}
+        onSelect={() => handleCategorySelect(item.strCategory)}
+      />
+    );
+  };
 
   // return <Loading />;
 
@@ -40,11 +41,12 @@ export default function Categories({navigation}) {
     return <Text>{error}</Text>;
   }
   return (
-    <SafeAreaView>
-      <Text>Categories</Text>
-      {/* <Text>{data.categories[0].idCategory}</Text> */}
-      
-      <FlatList data={data.categories} renderItem={renderCategory} keyExtractor={item => item.idCategory}/>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={data.categories}
+        renderItem={renderCategory}
+        keyExtractor={item => item.idCategory}
+      />
     </SafeAreaView>
   );
 }
